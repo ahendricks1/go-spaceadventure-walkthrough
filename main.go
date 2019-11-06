@@ -6,7 +6,7 @@ func main() {
 	printWelcome()
 	printGreeting(getResponseToPrompt("What is your name?"))
 	fmt.Println("Let's go on an adventure!")
-	travel()
+	travel(getResponseToPrompt("Shall I randomly choose a planet for you to visit? (Y or N)"))
 }
 
 func printWelcome() {
@@ -18,6 +18,7 @@ func printGreeting(name string) {
 	fmt.Printf("Nice to meet you, %s. My name is Eliza, I'm an old friend of Siri.\n", name)
 }
 
+/*
 func travel() {
 	var choice string
 	for choice != "Y" && choice != "N" {
@@ -30,6 +31,18 @@ func travel() {
 		} else {
 			fmt.Println("Sorry, I didn't get that.")
 		}
+	}
+}
+*/
+
+func travel(choice string) {
+	if choice == "Y" {
+		travelToRandomPlanet()
+	} else if choice == "N" {
+		planetName := getResponseToPrompt("Name the planet you would like to visit.")
+		travelToPlanet(planetName)
+	} else {
+		travel(getResponseToPrompt("I'm sorry, I didn't get that."))
 	}
 }
 
