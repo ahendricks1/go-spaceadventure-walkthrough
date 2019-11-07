@@ -2,6 +2,14 @@ package spaceadventure
 
 import "fmt"
 
+func Start() {
+	PrintWelcome()
+	PrintGreeting(GetResponseToPrompt("What is your name?"))
+	fmt.Println("Let's go on an adventure!")
+	Travel(GetResponseToPrompt("Shall I randomly choose a planet for you to visit? (Y or N)"))
+
+}
+
 func PrintWelcome() {
 	fmt.Println("Welcome to the Solar System!")
 	fmt.Println("There are 8 planets to explore.")
