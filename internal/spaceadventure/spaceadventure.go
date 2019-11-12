@@ -2,16 +2,15 @@ package spaceadventure
 
 import "fmt"
 
-func Start() {
-	PrintWelcome()
+func Start(planetarySystem PlanetarySystem) {
+	PrintWelcome(planetarySystem)
 	PrintGreeting(GetResponseToPrompt("What is your name?"))
 	fmt.Println("Let's go on an adventure!")
-	Travel(GetResponseToPrompt("Shall I randomly choose a planet for you to visit? (Y or N)"))
-
+	Travel(PromptForRandomOrSpecificDestination("Shall I randomly choose a planet for you to visit? (Y or N)"))
 }
 
-func PrintWelcome() {
-	fmt.Println("Welcome to the Solar System!")
+func PrintWelcome(planetarySystem PlanetarySystem) {
+	fmt.Printf("Welcome to the %s!\n", planetarySystem.Name)
 	fmt.Println("There are 8 planets to explore.")
 }
 
@@ -36,15 +35,27 @@ func travel() {
 }
 */
 
-func Travel(choice string) {
-	if choice == "Y" {
+func Travel(randomDestination bool) {
+	if (randomDestination) {
 		TravelToRandomPlanet()
-	} else if choice == "N" {
-		planetName := GetResponseToPrompt("Name the planet you would like to visit.")
-		TravelToPlanet(planetName)
 	} else {
-		Travel(GetResponseToPrompt("I'm sorry, I didn't get that."))
+		TravelToPlanet(GetResponseToPrompt("Please name the planet you would like to visit."))
 	}
+}
+
+func PromptForRandomOrSpecificDestination(prompt string) bool {
+	var choice string
+	for choice != "Y" && choice != "N" {
+		choice = GetResponseToPrompt(prompt)
+		if choice == "Y" {
+			return true
+		} else if choice == "N" {
+			return false
+		} else {
+			fmt.Println("I'm sorry I didn't get that.")
+		}
+	}
+	return false
 }
 
 func GetResponseToPrompt(prompt string) string {
