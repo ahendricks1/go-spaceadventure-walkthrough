@@ -11,7 +11,7 @@ func Start(planetarySystem PlanetarySystem) {
 
 func PrintWelcome(planetarySystem PlanetarySystem) {
 	fmt.Printf("Welcome to the %s!\n", planetarySystem.Name)
-	fmt.Println("There are 8 planets to explore.")
+	fmt.Printf("There are %d planets to explore.\n", planetarySystem.NumberOfPlanets())
 }
 
 func PrintGreeting(name string) {
